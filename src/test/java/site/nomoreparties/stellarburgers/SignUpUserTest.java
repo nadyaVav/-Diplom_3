@@ -69,10 +69,6 @@ public class SignUpUserTest extends AbstractTest{
     + "\n After test case user will be deleted")
   public void registerUserWithCorrectData() {
 
-    //TODO изменить страницу
-   // headerPage.clickPersonalAreaLocator(loginPage.getSignInButtonLocator());
-    //loginPage.clickSignUpLink(signUpPage.getSignUpButtonLocator());
-
     signUpPage.fillClientDataForRegistration(user.getName(), user.getEmail(), user.getPassword());
     signUpPage.clickOnSignUpButton(loginPage.getSignInButtonLocator());
     assertTrue("User should be on login page after registration", loginPage.isLoginPage());

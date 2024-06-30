@@ -10,7 +10,6 @@ public class UserSteps {
 
   private static final String CREATE_USER = "/api/auth/register";
   private static final String DELETE_USER = "/api/auth/user";
-  private static final String UPDATE_USER = "/api/auth/user";
   private static final String LOGIN_USER = "/api/auth/login";
 
   @Step("Create user - send POST request to /api/auth/register for creating user")
