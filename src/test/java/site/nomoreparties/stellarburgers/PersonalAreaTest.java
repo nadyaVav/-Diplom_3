@@ -135,4 +135,5 @@ public class PersonalAreaTest extends AbstractTest{
     personalAreaPage.clickOnLogOutButton(loginPage.getSignInButtonLocator());
     assertTrue("Should be displayed sign in button on login page", loginPage.isLoginPage());
   }
+
 }

@@ -71,4 +71,5 @@ public class MainPage {
   public boolean isFillingsTabActive() {
     return driver.findElement(activeTab).getText().equals("Начинки");
   }
+
 }

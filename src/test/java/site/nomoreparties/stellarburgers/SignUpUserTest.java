@@ -94,7 +94,6 @@ public class SignUpUserTest extends AbstractTest{
     signUpPage.fillClientDataForRegistration(user.getName(), user.getEmail(), user.getPassword());
     signUpPage.clickOnSignUpButton(signUpPage.getIncorrectPasswordMessageLocator());
     assertTrue("Error message should be correct", signUpPage.isIncorrectPasswordMessageLocator());
-
   }
 
 }

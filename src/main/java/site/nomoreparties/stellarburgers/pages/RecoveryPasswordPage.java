@@ -12,11 +12,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 @Data
 public class RecoveryPasswordPage {
 
-
   private WebDriver driver;
   private By signUpLinkLocator = By.xpath(".//button[text()='Восстановить']");
   private By signInLinkLocator = By.xpath(".//a[text()='Войти']");
-
 
   public RecoveryPasswordPage(WebDriver driver) {
     this.driver = driver;

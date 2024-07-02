@@ -40,10 +40,8 @@ public class LoginUserTest extends AbstractTest {
 
   @Before
   public void setUp() {
-
     RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
     Faker faker = new Faker(new Locale("en-GB"));
-
     user = new User();
     user.setName(faker.name().firstName());
     user.setPassword(faker.internet().password(6, 10));
@@ -53,7 +51,6 @@ public class LoginUserTest extends AbstractTest {
       createUser(user).
       then()
       .extract().body().path("accessToken");
-
     user.setAccessToken(accessToken);
 
     webDriver = WebDriverFactory.getWebDriver();
@@ -64,25 +61,14 @@ public class LoginUserTest extends AbstractTest {
     mainPage = new MainPage(webDriver);
     recoveryPasswordPage = new RecoveryPasswordPage(webDriver);
 
+    webDriver.get(BASE_URI);
   }
-
-  @After
-  public void tearDown() {
-    webDriver.quit();
-
-    if (user.getAccessToken() != null) {
-      userSteps.deleteUser(user);
-    }
-  }
-
-  //вход по кнопке «Войти в аккаунт» на главной
   @Test
   @DisplayName("Login using \"Log in to account\" button on main page")
   @Description("Test for checking login user using \"Log in to account\" button on main page"
     + "\n User is created using API"
     + "\n After test the user will be deleted using API")
   public void loginOnMainPageByCreateOrderButton() {
-    webDriver.get(BASE_URI);
 
     mainPage.clickLoginToAccountButton(loginPage.getSignInButtonLocator());
 
@@ -99,7 +85,6 @@ public class LoginUserTest extends AbstractTest {
     + "\n User is created using API"
     + "\n After test the user will be deleted using API")
   public void loginOnHeaderByPersonalAreaButton() {
-    webDriver.get(BASE_URI);
 
     headerPage.clickOnPersonalAreaButton(loginPage.getSignInButtonLocator());
     loginPage.fillClientDataForLogin(user.getEmail(), user.getPassword());
@@ -116,8 +101,8 @@ public class LoginUserTest extends AbstractTest {
           + "\n User is created using API"
           + "\n After test the user will be deleted using API")
   public void loginOnSignUpFormBySignInLink() {
-    webDriver.get(SIGN_UP_URI);
 
+    webDriver.get(SIGN_UP_URI);
     signUpPage.clickOnSignInLink(loginPage.getSignInButtonLocator());
     loginPage.fillClientDataForLogin(user.getEmail(), user.getPassword());
     loginPage.clickSignInButton(mainPage.getCreateOrderButtonLocator());
@@ -133,13 +118,22 @@ public class LoginUserTest extends AbstractTest {
           + "\n User is created using API"
           + "\n After test the user will be deleted using API")
   public void loginOnPasswordRecoveryPageBySignInLink() {
-    webDriver.get(RECOVERY_PASSWORD_URI);
 
+    webDriver.get(RECOVERY_PASSWORD_URI);
     recoveryPasswordPage.clickOnSignInLink(loginPage.getSignInButtonLocator());
     loginPage.fillClientDataForLogin(user.getEmail(), user.getPassword());
     loginPage.clickSignInButton(mainPage.getCreateOrderButtonLocator());
 
     assertTrue("Should be displayed \"Create order\" button", mainPage.isAuthorizeMode());
+  }
+
+  @After
+  public void tearDown() {
+    webDriver.quit();
+
+    if (user.getAccessToken() != null) {
+      userSteps.deleteUser(user);
+    }
   }
 
 }

@@ -47,4 +47,5 @@ public class LoginPage {
     driver.findElement(emailFieldLocator).sendKeys(email);
     driver.findElement(passwordFieldLocator).sendKeys(password);
   }
+
 }
